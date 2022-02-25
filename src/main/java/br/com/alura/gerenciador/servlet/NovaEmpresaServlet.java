@@ -22,8 +22,18 @@ public class NovaEmpresaServlet extends HttpServlet {
 		
 		PrintWriter out  = response.getWriter();
 		
+		// pega o nome do input do form
 		String nomeEmpresa = request.getParameter("nome");
+		// cria o obejto empresa
+		Empresa empresa = new Empresa();
+		// atribui nome para a empresa
+		empresa.setNome(nomeEmpresa);
 		
+		// cria um banco fake com lista
+		Banco banco = new Banco();
+		// adiciona empresa a lista de empresas
+		banco.adiciona(empresa);
+				
 		System.out.println("Cadastrando empresa: " + nomeEmpresa);
 		
 		out.println("<html lang=\"en\">\n"
