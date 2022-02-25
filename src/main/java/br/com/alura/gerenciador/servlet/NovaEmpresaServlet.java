@@ -3,6 +3,7 @@ package br.com.alura.gerenciador.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,39 +17,31 @@ import javax.servlet.http.HttpServletResponse;
 public class NovaEmpresaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Com a atualização de service para doPost o metodo passa a não receber mais get pelo forms,
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Com a atualização de service para doPost o metodo passa a não receber mais
+		// get pelo forms,
 		// Deixando a informação mais segura por não aparecer na url
-		
-		PrintWriter out  = response.getWriter();
-		
+
 		// pega o nome do input do form
 		String nomeEmpresa = request.getParameter("nome");
 		// cria o obejto empresa
 		Empresa empresa = new Empresa();
 		// atribui nome para a empresa
 		empresa.setNome(nomeEmpresa);
-		
+
 		// cria um banco fake com lista
 		Banco banco = new Banco();
 		// adiciona empresa a lista de empresas
 		banco.adiciona(empresa);
-				
+
 		System.out.println("Cadastrando empresa: " + nomeEmpresa);
-		
-		out.println("<html lang=\"en\">\n"
-				+ "<head>\n"
-				+ "    <meta charset=\"UTF-8\">\n"
-				+ "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
-				+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
-				+ "    <title>Cadastro de empresa</title>\n"
-				+ "</head>\n"
-				+ "<body>\n"
-				+ "    Empresa "
-				+ nomeEmpresa
-				+" cadastrada com sucesso!"
-				+ "</body>\n"
-				+ "</html>");
+
+		// prepara request para ser despachado com atributo
+		request.setAttribute("empresa", nomeEmpresa);
+		RequestDispatcher rd = request.getRequestDispatcher("/novaEmpresaCriada.jsp");
+		rd.forward(request, response);
+
 	}
 
 }

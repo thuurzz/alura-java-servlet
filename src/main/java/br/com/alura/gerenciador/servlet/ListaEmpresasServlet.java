@@ -1,9 +1,9 @@
 package br.com.alura.gerenciador.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,21 +19,20 @@ public class ListaEmpresasServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 
 		// Gerar html com a lista de empresas
-
 		Banco banco = new Banco();
 		List<Empresa> lista = banco.getEmpresas();
+		
+		// coloca o atributo no resquest para ser dispachado
+		request.setAttribute("empresas", lista);
 
-		PrintWriter out = response.getWriter();
-		out.println("<html lang=en>\n" + "<head>\n" + "    <meta charset=\"UTF-8\">\n"
-				+ "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
-				+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
-				+ "    <title>Lista Empresas Cadastradas</title>\n" + "</head>\n" + "<body>\n" + "<ul>");
-		for (Empresa empresa : lista) {
-			out.println("<li>" + empresa.getNome() + "</li>");
-		}
-		out.println("</ul>" + "</body>\n" + "</html>");
+		// fala para o dispatcher para onde ele vai despachar os dados
+		RequestDispatcher rd = request.getRequestDispatcher("/listaEmpresas.jsp");
+
+		// manda ele levar
+		rd.forward(request, response);
 
 	}
 
