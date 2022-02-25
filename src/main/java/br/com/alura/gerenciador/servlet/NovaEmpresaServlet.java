@@ -16,7 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 public class NovaEmpresaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Com a atualização de service para doPost o metodo passa a não receber mais get pelo forms,
+		// Deixando a informação mais segura por não aparecer na url
 		
 		PrintWriter out  = response.getWriter();
 		
