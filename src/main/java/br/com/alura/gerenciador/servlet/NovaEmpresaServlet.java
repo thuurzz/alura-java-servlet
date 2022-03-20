@@ -19,9 +19,9 @@ public class NovaEmpresaServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Com a atualização de service para doPost o metodo passa a não receber mais
+		// Com a atualizaï¿½ï¿½o de service para doPost o metodo passa a nï¿½o receber mais
 		// get pelo forms,
-		// Deixando a informação mais segura por não aparecer na url
+		// Deixando a informaï¿½ï¿½o mais segura por nï¿½o aparecer na url
 
 		// pega o nome do input do form
 		String nomeEmpresa = request.getParameter("nome");
@@ -39,7 +39,7 @@ public class NovaEmpresaServlet extends HttpServlet {
 
 		// prepara request para ser despachado com atributo
 		request.setAttribute("empresa", nomeEmpresa);
-		RequestDispatcher rd = request.getRequestDispatcher("/novaEmpresaCriada.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/novaEmpresa.jsp");
 		rd.forward(request, response);
 
 	}
