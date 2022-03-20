@@ -38,8 +38,8 @@ public class NovaEmpresaServlet extends HttpServlet {
 		System.out.println("Cadastrando empresa: " + nomeEmpresa);
 
 		// prepara request para ser despachado com atributo
-		request.setAttribute("empresa", nomeEmpresa);
 		RequestDispatcher rd = request.getRequestDispatcher("/novaEmpresa.jsp");
+		request.setAttribute("empresa", nomeEmpresa);
 		rd.forward(request, response);
 
 	}

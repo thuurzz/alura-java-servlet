@@ -25,11 +25,11 @@ public class ListaEmpresasServlet extends HttpServlet {
 		Banco banco = new Banco();
 		List<Empresa> lista = banco.getEmpresas();
 		
-		// coloca o atributo no resquest para ser dispachado
-		request.setAttribute("empresas", lista);
-
 		// fala para o dispatcher para onde ele vai despachar os dados
 		RequestDispatcher rd = request.getRequestDispatcher("/listaEmpresas.jsp");
+		
+		// coloca o atributo no resquest para ser dispachado
+		request.setAttribute("empresas", lista);
 
 		// manda ele levar
 		rd.forward(request, response);
